@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coolpc AI 顧問 - 設定</title>
+  <style>
+    :root {
+      --primary: #00d1b2;
+      --primary-dark: #00b89c;
+      --link: #8aa4ff;
+      --text: #f4f6fb;
+      --muted: #a6adbb;
+      --border: #343a46;
+      --surface: #20242b;
+      --input-bg: #171a21;
+      --bg: #15171c;
+      --danger: #f14668;
+      --hover-border: #5a6575;
+      --field-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.22);
+      --panel-shadow: 0 5px 18px rgba(0, 0, 0, 0.18);
+      --focus-shadow: 0 0 0 3px rgba(0, 209, 178, 0.22);
+      --primary-shadow: 0 2px 12px rgba(0, 209, 178, 0.26);
+      --note-text: #9ff0cf;
+      --note-bg: #102720;
+      --note-border: #1f5f50;
+      --status-text: #9ff0cf;
+    }
+
+    body[data-theme="light"] {
+      --link: #485fc7;
+      --text: #363636;
+      --muted: #6b7280;
+      --border: #dbdbdb;
+      --surface: #ffffff;
+      --input-bg: #ffffff;
+      --bg: #f5f7fb;
+      --hover-border: #b5b5b5;
+      --field-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.05);
+      --panel-shadow: 0 3px 10px rgba(10, 10, 10, 0.04);
+      --focus-shadow: 0 0 0 3px rgba(0, 209, 178, 0.18);
+      --primary-shadow: 0 2px 8px rgba(0, 209, 178, 0.24);
+      --note-text: #0b6b57;
+      --note-bg: #effaf5;
+      --note-border: #d7f3e7;
+      --status-text: #257953;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+    }
+    body {
+      width: 320px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 13px;
+    }
+    header {
+      background: var(--surface);
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    header h1 {
+      color: var(--text);
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    header h1::after {
+      content: "";
+      display: block;
+      width: 36px;
+      height: 3px;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: var(--primary);
+    }
+    .content {
+      padding: 14px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 13px 14px;
+      box-shadow: var(--panel-shadow);
+    }
+    .section-title {
+      color: var(--link);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+    label {
+      display: block;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 5px;
+      margin-top: 12px;
+    }
+    label:first-of-type { margin-top: 0; }
+    select, input {
+      width: 100%;
+      height: 36px;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.4;
+      padding: 7px 10px;
+      outline: none;
+      box-shadow: var(--field-shadow);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    select:hover, input:hover { border-color: var(--hover-border); }
+    select:focus, input:focus {
+      border-color: var(--primary);
+      box-shadow: var(--focus-shadow);
+    }
+    .apikey-row { position: relative; }
+    .toggle-eye {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: 0;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 12px;
+      height: auto;
+      padding: 2px 4px;
+      width: auto;
+      box-shadow: none;
+    }
+    .toggle-eye:hover { color: var(--link); }
+    input.apikey { padding-right: 38px; }
+    .save-btn {
+      width: 100%;
+      height: 38px;
+      background: var(--primary);
+      color: #ffffff;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--primary-shadow);
+      transition: background 0.15s, box-shadow 0.15s;
+    }
+    .save-btn:hover { background: var(--primary-dark); }
+    .status {
+      min-height: 18px;
+      color: var(--status-text);
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .status.error { color: var(--danger); }
+    footer {
+      padding: 10px 16px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+      background: var(--surface);
+    }
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 9px;
+    }
+    .checkbox-row input {
+      width: auto;
+      height: auto;
+      accent-color: var(--primary);
+      box-shadow: none;
+    }
+    .checkbox-row span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .apikey-section.hidden { display: none; }
+    .chrome-ai-note {
+      display: none;
+      margin-top: 10px;
+      padding: 9px 10px;
+      color: var(--note-text);
+      background: var(--note-bg);
+      border: 1px solid var(--note-border);
+      border-radius: 4px;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    .chrome-ai-note.visible { display: block; }
+  </style>
+</head>
+<body data-theme="dark">
+  <header>
+    <h1>Coolpc AI 顧問設定</h1>
+  </header>
+
+  <div class="content">
+    <div class="section">
+      <div class="section-title">AI 模型設定</div>
+
+      <label>介面配色</label>
+      <select id="theme">
+        <option value="dark">深色</option>
+        <option value="light">亮色</option>
+      </select>
+
+      <label>AI 提供商</label>
+      <select id="provider">
+        <option value="openai">OpenAI (GPT)</option>
+        <option value="gemini">Google Gemini</option>
+        <option value="claude">Anthropic Claude</option>
+        <option value="chrome-ai">Chrome 內建 AI（免 API Key）</option>
+      </select>
+
+      <label>模型</label>
+      <select id="model"></select>
+
+      <div class="apikey-section" id="apikey-section">
+        <label>API Key</label>
+        <div class="apikey-row">
+          <input id="api-key" type="password" class="apikey" placeholder="貼上你的 API Key..." />
+          <button class="toggle-eye" id="toggle-eye">顯示</button>
+        </div>
+
+        <div class="checkbox-row">
+          <input type="checkbox" id="save-key" />
+          <span>記住 API Key（存於瀏覽器本機）</span>
+        </div>
+      </div>
+
+      <div class="chrome-ai-note" id="chrome-ai-note">
+        使用 Chrome 內建 AI（Gemini Nano），無需 API Key。<br/>
+        需 Chrome 127+ 且已啟用 Built-in AI 功能。
+      </div>
+    </div>
+
+    <button class="save-btn" id="save-btn">儲存設定</button>
+    <div class="status" id="status"></div>
+  </div>
+
+  <footer>設定會同步至 Coolpc 頁面的 AI 顧問 Sidebar</footer>
+  <script src="popup.js"></script>
+</body>
+</html>

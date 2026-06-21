@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Coolpc Explorer",
+  "version": "0.1.0",
+  "description": "AI 電腦組裝顧問 — 在 CoolPC 頁面右側顯示 AI 推薦零件",
+  "permissions": ["storage", "scripting"],
+  "host_permissions": [
+    "*://www.coolpc.com.tw/*",
+    "https://api.openai.com/*",
+    "https://generativelanguage.googleapis.com/*",
+    "https://api.anthropic.com/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://www.coolpc.com.tw/evaluate.php*"],
+      "js": ["content/content.js"],
+      "css": ["content/sidebar.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://www.coolpc.com.tw/evaluate.php*"],
+      "js": ["content/main-world-interceptor.js"],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_title": "Coolpc AI 顧問"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
