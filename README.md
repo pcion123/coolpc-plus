@@ -1,6 +1,8 @@
 # coolpc-plus
 
-Coolpc Plus 是一個 Chrome Extension，專為 [原價屋線上估價](https://www.coolpc.com.tw/evaluate.php) 頁面設計。它會在估價頁右側加入「CoolPC AI 配單助手」側邊欄，讀取目前頁面上的零件清單，依照使用者的預算、用途與補充需求，透過 AI 推薦合適的電腦組裝配置，並自動高亮推薦零件。
+Coolpc Plus 是一個 Chrome Extension，專為 [原價屋線上估價](https://www.coolpc.com.tw/evaluate.php) 頁面設計。它會在估價頁右側加入「CoolPC AI 配單助手」側邊欄，讀取目前頁面上已公開顯示的零件清單，依照使用者的預算、用途與補充需求，透過 AI 推薦合適的電腦組裝配置，並自動高亮推薦零件。
+
+> 本專案僅供學習參考，不代表原價屋官方服務；不進行自動化爬取、批次下載或非公開資料存取。使用時請尊重網站服務條款與站方資源。
 
 ## 主要功能
 
